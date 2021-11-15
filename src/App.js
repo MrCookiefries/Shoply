@@ -1,25 +1,20 @@
-import logo from './logo.svg';
+import { shallowEqual, useSelector } from 'react-redux';
+import { Link, Outlet } from 'react-router-dom';
 import './App.css';
+import AppRoutes from './components/AppRoutes';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+const App = () => {
+	const cart = useSelector(store => store.cart, shallowEqual);
+
+	return (
+		<div className="App">
+			<Link to="/"><h1>Shoply</h1></Link>
+			<p>Cart total: {cart.length}</p>
+			<Link to="cart">Go to cart</Link>
+			<AppRoutes />
+			<Outlet />
+		</div>
+	);
 }
 
 export default App;
